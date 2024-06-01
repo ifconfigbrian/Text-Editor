@@ -13,7 +13,8 @@ public class BsCode extends JFrame implements ActionListener{
     private JMenuItem newTextFile,newFile,newWindow,openFile,openFolder,openWorkspace,openRecent,addFolderToWorkSpace,saveWorkSpaceAs,
                      duplicateWorkSpace,saveItem,saveAs,saveAll,share,autoSave,preferences,revertFile,closeEditor,closeFolder,closeWindow,Exit;
     private JMenuItem cutItem,copyItem,pasteItem,redoItem,undoItem,find,replace,findInFiles,replaceInFiles,toggleLineComment,toggleBlockComment,emmet;
-    private JMenuItem fontItem;
+    private JMenuItem selectAll,expandSelection,shrinkSelection,copyLineUp,copyLineDown,moveLineUp,moveLineDown,duplicateSelection,addCursorAbove,
+                       addCursorBelow,addCursorToLineEnd,addNextOccurence,addPreviousOccurence,selectAllOccurences,switchToCtrl,columnSelectionMode;
     private UndoManager undoManager;
 
     public BsCode(){
@@ -125,11 +126,45 @@ public class BsCode extends JFrame implements ActionListener{
         editMenu.add(emmet);
         //add to menubar
         menuBar.add(editMenu);
-        //initialize selection menu
+        // //initialize selection menu
+        // selectAll,expandSelection,shrinkSelection,copyLineUp,copyLineDown,moveLineUp,moveLineDown,duplicateSelection,addCursorAbove,
+        //                addCursorBelow,addCursorToLineEnd,addNextOccurence,addPreviousOccurence,selectAllOccurences,switchToCtrl,columnSelectionMode
         selectionMenu = new JMenu("Selection");
-        fontItem = new JMenuItem("Font");
-        fontItem.addActionListener(this);
-        selectionMenu.add(fontItem);
+        selectAll = new JMenuItem("Select All");
+        expandSelection = new JMenuItem("Expand Selection");
+        shrinkSelection = new JMenuItem("Shrink Selection");
+        copyLineUp = new JMenuItem("Copy Line Up");
+        copyLineDown = new JMenuItem("Copy Line Down");
+        moveLineUp = new JMenuItem("Select All");
+        moveLineDown = new JMenuItem("Move Line Down");
+        duplicateSelection = new JMenuItem("Duplicate Selection");
+        addCursorAbove = new JMenuItem("Add Cursor Above");
+        addCursorBelow = new JMenuItem("Add Cursor Below");
+        addCursorToLineEnd = new JMenuItem("Add Cursor To Line End");
+        addNextOccurence = new JMenuItem("Add Next Occurence");
+        addPreviousOccurence = new JMenuItem("Add Previous Occurence");
+        selectAllOccurences = new JMenuItem("Select All Occurences");
+        switchToCtrl = new JMenuItem("Switch To ctrl+click for Multi-Cursor");
+        columnSelectionMode = new JMenuItem("Column Selection Mode");
+        selectionMenu.add(selectAll);
+        selectionMenu.add(expandSelection);
+        selectionMenu.add(shrinkSelection);
+        selectionMenu.addSeparator();
+        selectionMenu.add(copyLineUp);
+        selectionMenu.add(copyLineDown);
+        selectionMenu.add(moveLineUp);
+        selectionMenu.add(moveLineDown);
+        selectionMenu.add(duplicateSelection);
+        selectionMenu.addSeparator();
+        selectionMenu.add(addCursorAbove);
+        selectionMenu.add(addCursorBelow);
+        selectionMenu.add(addCursorToLineEnd);
+        selectionMenu.add(addNextOccurence);
+        selectionMenu.add(addPreviousOccurence);
+        selectionMenu.add(selectAllOccurences);
+        selectionMenu.addSeparator();
+        selectionMenu.add(switchToCtrl);
+        selectionMenu.add(columnSelectionMode);
         menuBar.add(selectionMenu);
         //initialize view menu
         viewMenu = new JMenu("View");
@@ -203,8 +238,6 @@ public class BsCode extends JFrame implements ActionListener{
             if(undoManager.canRedo()){
                 undoManager.redo();
             }
-        }else if(source == fontItem){
-            System.out.println("coming soon");
         }
     }
     public static void main(String[]args){
