@@ -30,7 +30,7 @@ public class BsCode extends JFrame implements ActionListener{
     //items for terminal
     private JMenuItem newTerminal,splitTerminal,runTask,runBuildTask,runActive,runSelected,showRunning,restartRunning,terminateTask,configureTasks,configureDefault;
     //items for help
-    private JMenuItem welcome,showAllCommands,documentation,editorPlayGround,showReleaseDates,keyboardShortcuts,videoTutorials,tipsTricks,reportIssue,devTools,updates,about;                                   
+    private JMenuItem welcome,showAllCommands,documentation,editorPlayGround,showReleaseNotes,keyboardShortcuts,videoTutorials,tipsTricks,reportIssue,devTools,updates,about;                                   
     private UndoManager undoManager;
 
     public BsCode(){
@@ -308,7 +308,6 @@ public class BsCode extends JFrame implements ActionListener{
         runMenu.add(installAdditional);
         menuBar.add(runMenu);
         //initialize terminal menu
-        //newTerminal,splitTerminal,runTask,runBuildTask,runActive,runSelected,showRunning,restartRunning,terminateTask,configureTasks,configureDefault
         terminalMenu = new JMenu("Terminal");
         newTerminal = new JMenuItem("New Terminal");
         splitTerminal = new JMenuItem("Split Terminal");
@@ -339,7 +338,41 @@ public class BsCode extends JFrame implements ActionListener{
         //add to menubar
         menuBar.add(terminalMenu);
         //initialize help menu
+        //welcome,showAllCommands,documentation,editorPlayGround,showReleaseDates,keyboardShortcuts,videoTutorials,tipsTricks,reportIssue,devTools,updates,about
         helpMenu = new JMenu("Help");
+        welcome = new JMenuItem("Welcome");
+        showAllCommands = new JMenuItem("Show All Commands");
+        documentation = new JMenuItem("Documentation");
+        editorPlayGround = new JMenuItem("Editor Playground");
+        showReleaseNotes = new JMenuItem("Show Release Notes");
+        keyboardShortcuts = new JMenuItem("Keyboard Shortcuts");
+        videoTutorials = new JMenuItem("Video Tutorials");
+        tipsTricks = new JMenuItem("Tips and Tricks");
+        reportIssue = new JMenuItem("Report Issue");
+        devTools = new JMenuItem("Toggle Developer Tools");
+        updates = new JMenuItem("Updates");
+        about = new JMenuItem("About");
+        //add to the menu
+        helpMenu.add(welcome);
+        helpMenu.addSeparator();
+        helpMenu.add(showAllCommands);
+        helpMenu.addSeparator();
+        helpMenu.add(documentation);
+        helpMenu.add(editorPlayGround);
+        helpMenu.add(showReleaseNotes);
+        helpMenu.addSeparator();
+        helpMenu.add(keyboardShortcuts);
+        helpMenu.add(videoTutorials);
+        helpMenu.add(tipsTricks);
+        helpMenu.addSeparator();
+        helpMenu.add(reportIssue);
+        helpMenu.addSeparator();
+        helpMenu.add(devTools);
+        helpMenu.addSeparator();
+        helpMenu.add(updates);
+        helpMenu.addSeparator();
+        helpMenu.add(about);
+        //add to menu bar
         menuBar.add(helpMenu);
         //set menubar
         setJMenuBar(menuBar);
