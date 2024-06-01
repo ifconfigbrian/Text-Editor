@@ -23,7 +23,14 @@ public class BsCode extends JFrame implements ActionListener{
                       terminal,wordWrap;
     //items for go menu
     private JMenuItem back,forwad,lastEditLocation,switchEditor,switchGroup,goToFile,goToSymbolInWorkspace,goToSymbolInEditor,defination,declaration,
-                      typeDefination,implementations,references,goToLineColumn,bracket,nextProblem,previousProblem,nextChange,previousChange;                  
+                      typeDefination,implementations,references,goToLineColumn,bracket,nextProblem,previousProblem,nextChange,previousChange; 
+    //items for run menu
+    private JMenuItem startDebugging,runWithout,stopDebugging,restartDebugging,openConfigurations,addConfiguration,stepOver,stepInto,stepOut,continuee,
+                       toggleBreakpoint,newBreakpoint,enableAll,disableAll,removeAll,installAdditional;
+    //items for terminal
+    private JMenuItem newTerminal,splitTerminal,runTask,runBuildTask,runActive,runSelected,showRunning,restartRunning,terminateTask,configureTasks,configureDefault;
+    //items for help
+    private JMenuItem welcome,showAllCommands,documentation,editorPlayGround,showReleaseDates,keyboardShortcuts,videoTutorials,tipsTricks,reportIssue,devTools,updates,about;                                   
     private UndoManager undoManager;
 
     public BsCode(){
@@ -257,10 +264,50 @@ public class BsCode extends JFrame implements ActionListener{
         goMenu.add(previousProblem);
         goMenu.addSeparator();
         goMenu.add(nextChange);
-        goMenu.add(previousChange);
+        goMenu.add(previousChange) ;
         menuBar.add(goMenu);
         //initialize run menu
+        //startDebugging,runWithout,stopDebugging,restartDebugging,openConfigurations,addConfiguration,stepOver,stepInto,stepOut,continuee,
+        //toggleBreakpoint,newBreakpoint,enableAll,disableAll,removeAll,installAdditional
         runMenu = new JMenu("Run");
+        startDebugging = new JMenuItem("Start Debugging");
+        runWithout = new JMenuItem("Run Without Debugging");
+        stopDebugging = new JMenuItem("Stop Debugging");
+        restartDebugging = new JMenuItem("Restart Debugging");
+        openConfigurations = new JMenuItem("Open Configurations");
+        addConfiguration = new JMenuItem("Add Configuration");
+        stepOver = new JMenuItem("Step Over");
+        stepInto = new JMenuItem("Step Into");
+        stepOut = new JMenuItem("Step Out");
+        continuee = new JMenuItem("Continue");
+        toggleBreakpoint = new JMenuItem("Toggle Breakpoint");
+        newBreakpoint = new JMenuItem("New Breakpoint");
+        enableAll = new JMenuItem("Enable All Breakpoints");
+        disableAll = new JMenuItem("Disable All Breakpoints");
+        removeAll = new JMenuItem("Remove All Breakpoints");
+        installAdditional = new JMenuItem("Install Additional Debuggers");
+        //add to the menu
+        runMenu.add(startDebugging);
+        runMenu.add(runWithout);
+        runMenu.add(stopDebugging);
+        runMenu.add(restartDebugging);
+        runMenu.addSeparator();
+        runMenu.add(openConfigurations);
+        runMenu.add(addConfiguration);
+        runMenu.addSeparator();
+        runMenu.add(stepOver);
+        runMenu.add(stepInto);
+        runMenu.add(stepOut);
+        runMenu.add(continuee);
+        runMenu.addSeparator();
+        runMenu.add(toggleBreakpoint);
+        runMenu.add(newBreakpoint);
+        runMenu.addSeparator();
+        runMenu.add(enableAll);
+        runMenu.add(disableAll);
+        runMenu.add(removeAll);
+        runMenu.addSeparator();
+        runMenu.add(installAdditional);
         menuBar.add(runMenu);
         //initialize terminal menu
         terminalMenu = new JMenu("Terminal");
