@@ -10,11 +10,17 @@ public class BsCode extends JFrame implements ActionListener{
     private JTextArea textArea;
     private JMenuBar menuBar;
     private JMenu fileMenu,editMenu,selectionMenu,viewMenu,goMenu,runMenu,terminalMenu,helpMenu;
+    //items for file menu
     private JMenuItem newTextFile,newFile,newWindow,openFile,openFolder,openWorkspace,openRecent,addFolderToWorkSpace,saveWorkSpaceAs,
                      duplicateWorkSpace,saveItem,saveAs,saveAll,share,autoSave,preferences,revertFile,closeEditor,closeFolder,closeWindow,Exit;
+    //items for edit menu
     private JMenuItem cutItem,copyItem,pasteItem,redoItem,undoItem,find,replace,findInFiles,replaceInFiles,toggleLineComment,toggleBlockComment,emmet;
+    //items for selection menu
     private JMenuItem selectAll,expandSelection,shrinkSelection,copyLineUp,copyLineDown,moveLineUp,moveLineDown,duplicateSelection,addCursorAbove,
                        addCursorBelow,addCursorToLineEnd,addNextOccurence,addPreviousOccurence,selectAllOccurences,switchToCtrl,columnSelectionMode;
+    //items for view menu
+    private JMenuItem commandPall,openView,appearance,editLayout,explorer,search,sourceControl,run,extensions,testing,problems,output,debugConsole,
+                      terminal,wordWrap;
     private UndoManager undoManager;
 
     public BsCode(){
@@ -126,9 +132,7 @@ public class BsCode extends JFrame implements ActionListener{
         editMenu.add(emmet);
         //add to menubar
         menuBar.add(editMenu);
-        // //initialize selection menu
-        // selectAll,expandSelection,shrinkSelection,copyLineUp,copyLineDown,moveLineUp,moveLineDown,duplicateSelection,addCursorAbove,
-        //                addCursorBelow,addCursorToLineEnd,addNextOccurence,addPreviousOccurence,selectAllOccurences,switchToCtrl,columnSelectionMode
+        //initialize selection menu
         selectionMenu = new JMenu("Selection");
         selectAll = new JMenuItem("Select All");
         expandSelection = new JMenuItem("Expand Selection");
@@ -167,7 +171,45 @@ public class BsCode extends JFrame implements ActionListener{
         selectionMenu.add(columnSelectionMode);
         menuBar.add(selectionMenu);
         //initialize view menu
+        // commandPall,openView,appearance,editLayout,explorer,search,sourceControl,run,extensions,testing,problems,output,debugConsole,
+        //               terminal,wordWrap
         viewMenu = new JMenu("View");
+        commandPall = new JMenuItem("Command Palete");
+        openView = new JMenuItem("Open View");
+        appearance = new JMenuItem("Appearance");
+        editLayout = new JMenuItem("Edit Layout");
+        explorer = new JMenuItem("Explorer");
+        search = new JMenuItem("Search");
+        sourceControl = new JMenuItem("Source Control");
+        run = new JMenuItem("Run");
+        extensions = new JMenuItem("Extensions");
+        testing = new JMenuItem("Testing");
+        problems = new JMenuItem("Problems");
+        output = new JMenuItem("Output");
+        debugConsole = new JMenuItem("Debug Console");
+        terminal = new JMenuItem("Terminal");
+        wordWrap = new JMenuItem("Word Wrap");
+        //adding the items to the menu
+        viewMenu.add(commandPall);
+        viewMenu.add(openView);
+        viewMenu.addSeparator();
+        viewMenu.add(appearance);
+        viewMenu.add(editLayout);
+        viewMenu.addSeparator();
+        viewMenu.add(explorer);
+        viewMenu.add(search);
+        viewMenu.add(sourceControl);
+        viewMenu.add(run);
+        viewMenu.add(extensions);
+        viewMenu.add(testing);
+        viewMenu.addSeparator();
+        viewMenu.add(problems);
+        viewMenu.add(output);
+        viewMenu.add(debugConsole);
+        viewMenu.add(terminal);
+        viewMenu.addSeparator();
+        viewMenu.add(wordWrap);
+        
         menuBar.add(viewMenu);
         //initialize go menu
         goMenu = new JMenu("Go");
