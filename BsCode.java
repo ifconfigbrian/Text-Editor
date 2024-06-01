@@ -10,7 +10,8 @@ public class BsCode extends JFrame implements ActionListener{
     private JTextArea textArea;
     private JMenuBar menuBar;
     private JMenu fileMenu,editMenu,selectionMenu,viewMenu,goMenu,runMenu,terminalMenu,helpMenu;
-    private JMenuItem newItem,openItem,saveItem,exitItem;
+    private JMenuItem newTextFile,newFile,newWindow,openFile,openFolder,openWorkspace,openRecent,addFolderToWorkSpace,saveWorkSpaceAs,
+                     duplicateWorkSpace,saveItem,saveAs,saveAll,share,autoSave,preferences,revertFile,closeEditor,closeFolder,closeWindow,Exit;
     private JMenuItem cutItem,copyItem,pasteItem,redoItem,undoItem;
     private JMenuItem fontItem;
     private UndoManager undoManager;
@@ -26,21 +27,62 @@ public class BsCode extends JFrame implements ActionListener{
         menuBar = new JMenuBar();
         //initialize file menu
         fileMenu = new JMenu("File");
-        newItem = new JMenuItem("New");
-        openItem = new JMenuItem("Open");
+        newTextFile = new JMenuItem("New Text File");
+        newFile = new JMenuItem("New File");
+        newWindow = new JMenuItem("New Window");
+        openFile = new JMenuItem("Open File");
+        openFolder = new JMenuItem("Open Folder");
+        openWorkspace = new JMenuItem("Open Workspace from File");
+        openRecent = new JMenuItem("Open Recent");
+        addFolderToWorkSpace = new JMenuItem("Add Folder to Workspace");
+        saveWorkSpaceAs = new JMenuItem("Save Workspace As");
+        duplicateWorkSpace = new JMenuItem("Duplicate Workspace");
         saveItem = new JMenuItem("Save");
-        exitItem = new JMenuItem("Exit");
+        saveAs = new JMenuItem("Save As");
+        saveAll = new JMenuItem("Save All");
+        share = new JMenuItem("Share");
+        autoSave = new JMenuItem("Auto Save");
+        preferences = new JMenuItem("Preferences");
+        revertFile = new JMenuItem("Revert File");
+        closeEditor = new JMenuItem("Close Editor");
+        closeFolder = new JMenuItem("Close Folder");
+        closeWindow = new JMenuItem("Close Window");
+        Exit = new JMenuItem("Exit");
+        
         //add action listeners to the items
-        newItem.addActionListener(this);
-        openItem.addActionListener(this);
+        newFile.addActionListener(this);
+        openFile.addActionListener(this);
         saveItem.addActionListener(this);
-        exitItem.addActionListener(this);
+        Exit.addActionListener(this);
         //add items to fileMenu
-        fileMenu.add(newItem);
-        fileMenu.add(openItem);
-        fileMenu.add(saveItem);
+        fileMenu.add(newTextFile);
+        fileMenu.add(newFile);
+        fileMenu.add(newWindow);
         fileMenu.addSeparator();
-        fileMenu.add(exitItem);
+        fileMenu.add(openFile);
+        fileMenu.add(openFolder);
+        fileMenu.add(openWorkspace);
+        fileMenu.add(openRecent);
+        fileMenu.addSeparator();
+        fileMenu.add(addFolderToWorkSpace);
+        fileMenu.add(saveWorkSpaceAs);
+        fileMenu.add(duplicateWorkSpace);
+        fileMenu.addSeparator();
+        fileMenu.add(saveItem);
+        fileMenu.add(saveAs);
+        fileMenu.add(saveAll);
+        fileMenu.addSeparator();
+        fileMenu.add(share);
+        fileMenu.addSeparator();
+        fileMenu.add(autoSave);
+        fileMenu.add(preferences);
+        fileMenu.addSeparator();
+        fileMenu.add(revertFile);
+        fileMenu.add(closeEditor);
+        fileMenu.add(closeFolder);
+        fileMenu.add(closeWindow);
+        fileMenu.addSeparator();
+        fileMenu.add(Exit);
         //add fileMenu to menuBar
         menuBar.add(fileMenu);
         //initialize edit menu
@@ -103,9 +145,9 @@ public class BsCode extends JFrame implements ActionListener{
     }
     public void actionPerformed(ActionEvent e){
         JMenuItem source = (JMenuItem)e.getSource();
-        if(source == newItem){
+        if(source == newFile){
             textArea.setText("");
-        }else if(source == openItem){
+        }else if(source == openFile){
             JFileChooser fileChooser = new JFileChooser();
             int option = fileChooser.showOpenDialog(this);
             if(option == JFileChooser.APPROVE_OPTION){
@@ -127,7 +169,7 @@ public class BsCode extends JFrame implements ActionListener{
                     JOptionPane.showMessageDialog(this,"Oops! Could not save file!!","Error",JOptionPane.ERROR_MESSAGE);
                 }
             }
-        }else if (source == exitItem){
+        }else if (source == Exit){
             System.exit(0);
         }else if(source == cutItem){
             textArea.cut();
@@ -147,14 +189,6 @@ public class BsCode extends JFrame implements ActionListener{
             System.out.println("coming soon");
         }
     }
-    // private void showFontDialog(){
-    //     JFontChooser fontChooser = new JFontChooser();
-    //     int option = fontChooser.showDialog(this);
-    //     if(option == JFontChooser.OK_OPTION){
-    //         Font font = fontChooser.getSelectedFont();
-    //         textArea.setFont(font);
-    //     }
-    // }
     public static void main(String[]args){
         new BsCode();
     }
