@@ -9,7 +9,7 @@ import java.io.*;
 public class BsCode extends JFrame implements ActionListener{
     private JTextArea textArea;
     private JMenuBar menuBar;
-    private JMenu fileMenu,editMenu,formatMenu;
+    private JMenu fileMenu,editMenu,selectionMenu,viewMenu,goMenu,runMenu,terminalMenu,helpMenu;
     private JMenuItem newItem,openItem,saveItem,exitItem;
     private JMenuItem cutItem,copyItem,pasteItem,redoItem,undoItem;
     private JMenuItem fontItem;
@@ -65,12 +65,27 @@ public class BsCode extends JFrame implements ActionListener{
         editMenu.add(redoItem);
         //add to menubar
         menuBar.add(editMenu);
-        //initialize format menu
-        formatMenu = new JMenu("Format");
+        //initialize selection menu
+        selectionMenu = new JMenu("Selection");
         fontItem = new JMenuItem("Font");
         fontItem.addActionListener(this);
-        formatMenu.add(fontItem);
-        menuBar.add(formatMenu);
+        selectionMenu.add(fontItem);
+        menuBar.add(selectionMenu);
+        //initialize view menu
+        viewMenu = new JMenu("View");
+        menuBar.add(viewMenu);
+        //initialize go menu
+        goMenu = new JMenu("Go");
+        menuBar.add(goMenu);
+        //initialize run menu
+        runMenu = new JMenu("Run");
+        menuBar.add(runMenu);
+        //initialize terminal menu
+        terminalMenu = new JMenu("Terminal");
+        menuBar.add(terminalMenu);
+        //initialize help menu
+        helpMenu = new JMenu("Help");
+        menuBar.add(helpMenu);
         //set menubar
         setJMenuBar(menuBar);
         //initialize undo manager..
