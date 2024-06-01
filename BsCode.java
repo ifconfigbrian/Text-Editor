@@ -12,7 +12,7 @@ public class BsCode extends JFrame implements ActionListener{
     private JMenu fileMenu,editMenu,selectionMenu,viewMenu,goMenu,runMenu,terminalMenu,helpMenu;
     private JMenuItem newTextFile,newFile,newWindow,openFile,openFolder,openWorkspace,openRecent,addFolderToWorkSpace,saveWorkSpaceAs,
                      duplicateWorkSpace,saveItem,saveAs,saveAll,share,autoSave,preferences,revertFile,closeEditor,closeFolder,closeWindow,Exit;
-    private JMenuItem cutItem,copyItem,pasteItem,redoItem,undoItem;
+    private JMenuItem cutItem,copyItem,pasteItem,redoItem,undoItem,find,replace,findInFiles,replaceInFiles,toggleLineComment,toggleBlockComment,emmet;
     private JMenuItem fontItem;
     private UndoManager undoManager;
 
@@ -86,12 +86,20 @@ public class BsCode extends JFrame implements ActionListener{
         //add fileMenu to menuBar
         menuBar.add(fileMenu);
         //initialize edit menu
+        //find,replace,findInFiles,replaceInFiles,toggleLineComment,toggleBlockComment,emmet
         editMenu = new JMenu("Edit");
         cutItem = new JMenuItem("Cut");
         copyItem = new JMenuItem("Copy");
         pasteItem = new JMenuItem("Paste");
         undoItem = new JMenuItem("Undo");
         redoItem = new JMenuItem("Redo");
+        find = new JMenu("Find");
+        replace = new JMenu("Replace");
+        findInFiles= new JMenu("Find In Files");
+        replaceInFiles = new JMenu("Replace In Files");
+        toggleLineComment = new JMenu("Toggle Line Comment");
+        toggleBlockComment = new JMenu("Toggle Block Comment");
+        emmet = new JMenu("Emmet:Expand Abbreviation");
         //add action listeners
         cutItem.addActionListener(this);
         copyItem.addActionListener(this);
@@ -99,12 +107,22 @@ public class BsCode extends JFrame implements ActionListener{
         undoItem.addActionListener(this);
         redoItem.addActionListener(this);
         //add to the menu
+        editMenu.add(undoItem);
+        editMenu.add(redoItem);
+        editMenu.addSeparator();
         editMenu.add(cutItem);
         editMenu.add(copyItem);
         editMenu.add(pasteItem);
         editMenu.addSeparator();
-        editMenu.add(undoItem);
-        editMenu.add(redoItem);
+        editMenu.add(find);
+        editMenu.add(replace);
+        editMenu.addSeparator();
+        editMenu.add(findInFiles);
+        editMenu.add(replaceInFiles);
+        editMenu.addSeparator();
+        editMenu.add(toggleLineComment);
+        editMenu.add(toggleBlockComment);
+        editMenu.add(emmet);
         //add to menubar
         menuBar.add(editMenu);
         //initialize selection menu
@@ -139,7 +157,7 @@ public class BsCode extends JFrame implements ActionListener{
             }
         });
         setDefaultCloseOperation(3);
-        setSize(900,700);
+        setSize(900,600);
         setVisible(true);
 
     }
