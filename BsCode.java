@@ -267,8 +267,6 @@ public class BsCode extends JFrame implements ActionListener{
         goMenu.add(previousChange) ;
         menuBar.add(goMenu);
         //initialize run menu
-        //startDebugging,runWithout,stopDebugging,restartDebugging,openConfigurations,addConfiguration,stepOver,stepInto,stepOut,continuee,
-        //toggleBreakpoint,newBreakpoint,enableAll,disableAll,removeAll,installAdditional
         runMenu = new JMenu("Run");
         startDebugging = new JMenuItem("Start Debugging");
         runWithout = new JMenuItem("Run Without Debugging");
@@ -310,7 +308,35 @@ public class BsCode extends JFrame implements ActionListener{
         runMenu.add(installAdditional);
         menuBar.add(runMenu);
         //initialize terminal menu
+        //newTerminal,splitTerminal,runTask,runBuildTask,runActive,runSelected,showRunning,restartRunning,terminateTask,configureTasks,configureDefault
         terminalMenu = new JMenu("Terminal");
+        newTerminal = new JMenuItem("New Terminal");
+        splitTerminal = new JMenuItem("Split Terminal");
+        runTask = new JMenuItem("Run Task");
+        runBuildTask = new JMenuItem("Run Build Task");
+        runActive = new JMenuItem("Run Active File");
+        runSelected = new JMenuItem("Run Selected Text");
+        showRunning = new JMenuItem("Show Running Task");
+        restartRunning = new JMenuItem("Restart Running Task");
+        terminateTask = new JMenuItem("Terminate Task");
+        configureTasks = new JMenuItem("Configure Tasks");
+        configureDefault = new JMenuItem("Configure Default Build Task");
+        //add to the menu
+        terminalMenu.add(newTerminal);
+        terminalMenu.add(splitTerminal);
+        terminalMenu.addSeparator();
+        terminalMenu.add(runTask);
+        terminalMenu.add(runBuildTask);
+        terminalMenu.add(runActive);
+        terminalMenu.add(runSelected);
+        terminalMenu.addSeparator();
+        terminalMenu.add(showRunning);
+        terminalMenu.add(restartRunning);
+        terminalMenu.add(terminateTask);
+        terminalMenu.addSeparator();
+        terminalMenu.add(configureTasks);
+        terminalMenu.add(configureDefault);
+        //add to menubar
         menuBar.add(terminalMenu);
         //initialize help menu
         helpMenu = new JMenu("Help");
