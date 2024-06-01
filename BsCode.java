@@ -21,6 +21,9 @@ public class BsCode extends JFrame implements ActionListener{
     //items for view menu
     private JMenuItem commandPall,openView,appearance,editLayout,explorer,search,sourceControl,run,extensions,testing,problems,output,debugConsole,
                       terminal,wordWrap;
+    //items for go menu
+    private JMenuItem back,forwad,lastEditLocation,switchEditor,switchGroup,goToFile,goToSymbolInWorkspace,goToSymbolInEditor,defination,declaration,
+                      typeDefination,implementations,references,goToLineColumn,bracket,nextProblem,previousProblem,nextChange,previousChange;                  
     private UndoManager undoManager;
 
     public BsCode(){
@@ -93,7 +96,6 @@ public class BsCode extends JFrame implements ActionListener{
         //add fileMenu to menuBar
         menuBar.add(fileMenu);
         //initialize edit menu
-        //find,replace,findInFiles,replaceInFiles,toggleLineComment,toggleBlockComment,emmet
         editMenu = new JMenu("Edit");
         cutItem = new JMenuItem("Cut");
         copyItem = new JMenuItem("Copy");
@@ -171,8 +173,6 @@ public class BsCode extends JFrame implements ActionListener{
         selectionMenu.add(columnSelectionMode);
         menuBar.add(selectionMenu);
         //initialize view menu
-        // commandPall,openView,appearance,editLayout,explorer,search,sourceControl,run,extensions,testing,problems,output,debugConsole,
-        //               terminal,wordWrap
         viewMenu = new JMenu("View");
         commandPall = new JMenuItem("Command Palete");
         openView = new JMenuItem("Open View");
@@ -213,6 +213,51 @@ public class BsCode extends JFrame implements ActionListener{
         menuBar.add(viewMenu);
         //initialize go menu
         goMenu = new JMenu("Go");
+        back = new JMenuItem("Back");
+        forwad = new JMenuItem("Forward");
+        lastEditLocation = new JMenuItem();
+        switchEditor = new JMenuItem("Switch Editor");
+        switchGroup = new JMenuItem("Switch Group");
+        goToFile = new JMenuItem("Go To File");
+        goToSymbolInWorkspace = new JMenuItem("Go To Symbol In Workspace");
+        goToSymbolInEditor = new JMenuItem("Go To Symbol In Editor");
+        defination = new JMenuItem("Go To Definition");
+        declaration = new JMenuItem("Go To Declaration");
+        typeDefination = new JMenuItem("Go To Type Definition");
+        implementations = new JMenuItem("Go To Implementations");
+        references = new JMenuItem("Go To References");
+        goToLineColumn = new JMenuItem("Go To Line/Column");
+        bracket = new JMenuItem("Go To Bracket");
+        nextProblem = new JMenuItem("Next Problem");
+        previousProblem = new JMenuItem("Previous Problem");
+        nextChange = new JMenuItem("Next Change");
+        previousChange = new JMenuItem("Previous Change");
+        //add to the menu
+        goMenu.add(back);
+        goMenu.add(forwad);
+        goMenu.add(lastEditLocation);
+        goMenu.addSeparator();
+        goMenu.add(switchEditor);
+        goMenu.add(switchGroup);
+        goMenu.addSeparator();
+        goMenu.add(goToFile);
+        goMenu.add(goToSymbolInWorkspace);
+        goMenu.addSeparator();
+        goMenu.add(goToSymbolInEditor);
+        goMenu.add(defination);
+        goMenu.add(declaration);
+        goMenu.add(typeDefination);
+        goMenu.add(implementations);
+        goMenu.add(references);
+        goMenu.addSeparator();
+        goMenu.add(goToLineColumn);
+        goMenu.add(bracket);
+        goMenu.addSeparator();
+        goMenu.add(nextProblem);
+        goMenu.add(previousProblem);
+        goMenu.addSeparator();
+        goMenu.add(nextChange);
+        goMenu.add(previousChange);
         menuBar.add(goMenu);
         //initialize run menu
         runMenu = new JMenu("Run");
