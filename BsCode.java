@@ -122,12 +122,13 @@ public class BsCode extends JFrame implements ActionListener{
         toggleLineComment = new JMenu("Toggle Line Comment");
         toggleBlockComment = new JMenu("Toggle Block Comment");
         emmet = new JMenu("Emmet:Expand Abbreviation");
-        //add action listeners
-        cutItem.addActionListener(this);
-        copyItem.addActionListener(this);
-        pasteItem.addActionListener(this);
-        undoItem.addActionListener(this);
-        redoItem.addActionListener(this);
+        JMenuItem[] editMenuItems = {
+            cutItem,copyItem,pasteItem,redoItem,undoItem,find,replace,findInFiles,replaceInFiles,toggleLineComment,toggleBlockComment,emmet
+    };
+        //add items to fileMenu
+        for (JMenuItem item : editMenuItems) {
+            item.addActionListener(this);
+        }
         //add to the menu
         editMenu.add(undoItem);
         editMenu.add(redoItem);
@@ -165,6 +166,15 @@ public class BsCode extends JFrame implements ActionListener{
         selectAllOccurences = new JMenuItem("Select All Occurences");
         switchToCtrl = new JMenuItem("Switch To ctrl+click for Multi-Cursor");
         columnSelectionMode = new JMenuItem("Column Selection Mode");
+        JMenuItem[] selectionMenuItems = {
+            selectAll,expandSelection,shrinkSelection,copyLineUp,copyLineDown,moveLineUp,moveLineDown,duplicateSelection,addCursorAbove,
+            addCursorBelow,addCursorToLineEnd,addNextOccurence,addPreviousOccurence,selectAllOccurences,switchToCtrl,columnSelectionMode
+    };
+        //add action listeners to items
+        for (JMenuItem item : selectionMenuItems) {
+            item.addActionListener(this);
+        }
+        //add items to the menu
         selectionMenu.add(selectAll);
         selectionMenu.add(expandSelection);
         selectionMenu.add(shrinkSelection);
@@ -202,6 +212,14 @@ public class BsCode extends JFrame implements ActionListener{
         debugConsole = new JMenuItem("Debug Console");
         terminal = new JMenuItem("Terminal");
         wordWrap = new JMenuItem("Word Wrap");
+        JMenuItem[] viewMenuItems = {
+            commandPall,openView,appearance,editLayout,explorer,search,sourceControl,run,extensions,testing,problems,output,debugConsole,
+            terminal,wordWrap
+    };
+        //add action listeners to items
+        for (JMenuItem item : viewMenuItems) {
+            item.addActionListener(this);
+        }
         //adding the items to the menu
         viewMenu.add(commandPall);
         viewMenu.add(openView);
@@ -245,6 +263,14 @@ public class BsCode extends JFrame implements ActionListener{
         previousProblem = new JMenuItem("Previous Problem");
         nextChange = new JMenuItem("Next Change");
         previousChange = new JMenuItem("Previous Change");
+        JMenuItem[] goMenuItems = {
+            back,forwad,lastEditLocation,switchEditor,switchGroup,goToFile,goToSymbolInWorkspace,goToSymbolInEditor,defination,declaration,
+            typeDefination,implementations,references,goToLineColumn,bracket,nextProblem,previousProblem,nextChange,previousChange
+    };
+        //add action listeners to items
+        for (JMenuItem item : goMenuItems) {
+            item.addActionListener(this);
+        }
         //add to the menu
         goMenu.add(back);
         goMenu.add(forwad);
@@ -290,6 +316,14 @@ public class BsCode extends JFrame implements ActionListener{
         disableAll = new JMenuItem("Disable All Breakpoints");
         removeAll = new JMenuItem("Remove All Breakpoints");
         installAdditional = new JMenuItem("Install Additional Debuggers");
+        JMenuItem[] runMenuItems = {
+            startDebugging,runWithout,stopDebugging,restartDebugging,openConfigurations,addConfiguration,stepOver,stepInto,stepOut,continuee,
+            toggleBreakpoint,newBreakpoint,enableAll,disableAll,removeAll,installAdditional
+    };
+        //add action listeners to items
+        for (JMenuItem item : runMenuItems) {
+            item.addActionListener(this);
+        }
         //add to the menu
         runMenu.add(startDebugging);
         runMenu.add(runWithout);
@@ -326,6 +360,13 @@ public class BsCode extends JFrame implements ActionListener{
         terminateTask = new JMenuItem("Terminate Task");
         configureTasks = new JMenuItem("Configure Tasks");
         configureDefault = new JMenuItem("Configure Default Build Task");
+        JMenuItem[] terminalMenuItems = {
+            newTerminal,splitTerminal,runTask,runBuildTask,runActive,runSelected,showRunning,restartRunning,terminateTask,configureTasks,configureDefault
+    };
+        //add action listeners to items
+        for (JMenuItem item : terminalMenuItems) {
+            item.addActionListener(this);
+        }
         //add to the menu
         terminalMenu.add(newTerminal);
         terminalMenu.add(splitTerminal);
@@ -358,6 +399,13 @@ public class BsCode extends JFrame implements ActionListener{
         devTools = new JMenuItem("Toggle Developer Tools");
         updates = new JMenuItem("Updates");
         about = new JMenuItem("About");
+        JMenuItem[] helpMenuItems = {
+            welcome,showAllCommands,documentation,editorPlayGround,showReleaseNotes,keyboardShortcuts,videoTutorials,tipsTricks,reportIssue,devTools,updates,about
+    };
+        //add action listeners to items
+        for (JMenuItem item : helpMenuItems) {
+            item.addActionListener(this);
+        }
         //add to the menu
         helpMenu.add(welcome);
         helpMenu.addSeparator();
