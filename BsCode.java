@@ -3,6 +3,8 @@ import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
 import javax.swing.undo.UndoManager;
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.*;
 import java.io.*;
 
@@ -39,11 +41,13 @@ public class BsCode extends JFrame implements ActionListener{
         textArea = new JTextArea();
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
+        textArea.setBackground(Color.LIGHT_GRAY);;
         add(new JScrollPane(textArea),BorderLayout.CENTER);
         //initialize menu bar
         menuBar = new JMenuBar();
         //initialize file menu
         fileMenu = new JMenu("File");
+        //add items to the menu
         newTextFile = new JMenuItem("New Text File");
         newFile = new JMenuItem("New File");
         newWindow = new JMenuItem("New Window");
@@ -66,39 +70,16 @@ public class BsCode extends JFrame implements ActionListener{
         closeWindow = new JMenuItem("Close Window");
         Exit = new JMenuItem("Exit");
         
-        //add action listeners to the items
-        newFile.addActionListener(this);
-        openFile.addActionListener(this);
-        saveItem.addActionListener(this);
-        Exit.addActionListener(this);
+        JMenuItem[] fileMenuItems = {
+            newTextFile,newFile,newWindow,openFile,openFolder,openWorkspace,openRecent,addFolderToWorkSpace,saveWorkSpaceAs,
+                     duplicateWorkSpace,saveItem,saveAs,saveAll,share,autoSave,preferences,revertFile,closeEditor,closeFolder,closeWindow,Exit
+    };
         //add items to fileMenu
-        fileMenu.add(newTextFile);
-        fileMenu.add(newFile);
-        fileMenu.add(newWindow);
-        fileMenu.addSeparator();
-        fileMenu.add(openFile);
-        fileMenu.add(openFolder);
-        fileMenu.add(openWorkspace);
-        fileMenu.add(openRecent);
-        fileMenu.addSeparator();
-        fileMenu.add(addFolderToWorkSpace);
-        fileMenu.add(saveWorkSpaceAs);
-        fileMenu.add(duplicateWorkSpace);
-        fileMenu.addSeparator();
-        fileMenu.add(saveItem);
-        fileMenu.add(saveAs);
-        fileMenu.add(saveAll);
-        fileMenu.addSeparator();
-        fileMenu.add(share);
-        fileMenu.addSeparator();
-        fileMenu.add(autoSave);
-        fileMenu.add(preferences);
-        fileMenu.addSeparator();
-        fileMenu.add(revertFile);
-        fileMenu.add(closeEditor);
-        fileMenu.add(closeFolder);
-        fileMenu.add(closeWindow);
-        fileMenu.addSeparator();
+        for (JMenuItem item : fileMenuItems) {
+            item.addActionListener(this);
+            fileMenu.add(item);
+        }
+        fileMenu.addSeparator(); // Add separator before exit item
         fileMenu.add(Exit);
         //add fileMenu to menuBar
         menuBar.add(fileMenu);
@@ -391,8 +372,16 @@ public class BsCode extends JFrame implements ActionListener{
     }
     public void actionPerformed(ActionEvent e){
         JMenuItem source = (JMenuItem)e.getSource();
-        if(source == newFile){
+        if(source == newTextFile || source == newFile){
             textArea.setText("");
+        }else if (source == newWindow){
+            new BsCode();
+        //events for listed items
+        }else if(source == openFolder || source == openWorkspace || source == openRecent || source == addFolderToWorkSpace){
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            fileChooser.showOpenDialog(this);
+            //events for listed items
         }else if(source == openFile){
             JFileChooser fileChooser = new JFileChooser();
             int option = fileChooser.showOpenDialog(this);
@@ -404,7 +393,8 @@ public class BsCode extends JFrame implements ActionListener{
                     JOptionPane.showMessageDialog(this,"Oops! Could not open file!!","Error",JOptionPane.ERROR_MESSAGE);
                 }
             }
-        }else if(source == saveItem){
+            //events for listed items
+        }else if(source == saveItem || source == saveWorkSpaceAs || source == duplicateWorkSpace || source == saveAs || source == saveAll){
             JFileChooser fileChooser = new JFileChooser();
             int option = fileChooser.showSaveDialog(this);
             if(option == JFileChooser.APPROVE_OPTION){
@@ -415,7 +405,34 @@ public class BsCode extends JFrame implements ActionListener{
                     JOptionPane.showMessageDialog(this,"Oops! Could not save file!!","Error",JOptionPane.ERROR_MESSAGE);
                 }
             }
-        }else if (source == Exit){
+            //events for listed items
+        }else if (source == share){
+            String text = textArea.getText();
+            StringSelection stringSelection = new StringSelection(text);
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            clipboard.setContents(stringSelection, null);
+            //events for listed items
+        }else if(source == autoSave){
+            //to be added soon..
+        }
+        //events for listed items
+        else if(source == revertFile){
+            //to be added..
+        }
+        //events for listed items
+        else if(source == closeEditor){
+            textArea.setText("");
+        }
+        //events for listed items
+        else if(source == closeFolder){
+        //to be added..
+       }
+       //events for listed items
+       else if(source == closeWindow){
+        dispose();
+      }
+      //events for listed items
+      else if (source == Exit){
             System.exit(0);
         }else if(source == cutItem){
             textArea.cut();
