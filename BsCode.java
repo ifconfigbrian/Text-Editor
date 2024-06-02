@@ -77,6 +77,7 @@ public class BsCode extends JFrame implements ActionListener{
         //add items to fileMenu
         for (JMenuItem item : fileMenuItems) {
             item.addActionListener(this);
+            fileMenu.addSeparator();
             fileMenu.add(item);
         }
         fileMenu.addSeparator(); // Add separator before exit item
