@@ -121,38 +121,42 @@ public class BsCode extends JFrame implements ActionListener{
         pasteItem = new JMenuItem("Paste");
         undoItem = new JMenuItem("Undo");
         redoItem = new JMenuItem("Redo");
-        findItem = new JMenu("Find");
-        replaceItem = new JMenu("Replace");
-        findInFilesItem= new JMenu("Find In Files");
-        replaceInFilesItem = new JMenu("Replace In Files");
-        toggleLineCommentItem = new JMenu("Toggle Line Comment");
-        toggleBlockCommentItem = new JMenu("Toggle Block Comment");
-        emmetItem = new JMenu("Emmet:Expand Abbreviation");
+        findItem = new JMenuItem("Find");
+        replaceItem = new JMenuItem("Replace");
+        findInFilesItem = new JMenuItem("Find in Files");
+        replaceInFilesItem = new JMenuItem("Replace in Files");
+        toggleLineCommentItem = new JMenuItem("Toggle Line Comment");
+        toggleBlockCommentItem = new JMenuItem("Toggle Block Comment");
+        emmetItem = new JMenuItem("Emmet: Expand Abbreviation");
 
-        JMenuItem[] editMenuItems = {
-            cutItem,copyItem,pasteItem,redoItem,undoItem,findItem,replaceItem,findInFilesItem,replaceInFilesItem,toggleLineCommentItem,
-            toggleBlockCommentItem,emmetItem
-    };
-        //add actionlisteners to fileMenu
-        for (JMenuItem item : editMenuItems) {
-            item.addActionListener(this);
-        }
-        //add to the menu
-        editMenu.add(undoItem);
-        editMenu.add(redoItem);
-        editMenu.addSeparator();
+        cutItem.addActionListener(this);
+        copyItem.addActionListener(this);
+        pasteItem.addActionListener(this);
+        undoItem.addActionListener(this);
+        redoItem.addActionListener(this);
+        findItem.addActionListener(this);
+        replaceItem.addActionListener(this);
+        findInFilesItem.addActionListener(this);
+        replaceInFilesItem.addActionListener(this);
+        toggleLineCommentItem.addActionListener(this);
+        toggleBlockCommentItem.addActionListener(this);
+        emmetItem.addActionListener(this);
+
         editMenu.add(cutItem);
         editMenu.add(copyItem);
         editMenu.add(pasteItem);
         editMenu.addSeparator();
+        editMenu.add(undoItem);
+        editMenu.add(redoItem);
+        editMenu.addSeparator();
         editMenu.add(findItem);
         editMenu.add(replaceItem);
-        editMenu.addSeparator();
         editMenu.add(findInFilesItem);
         editMenu.add(replaceInFilesItem);
         editMenu.addSeparator();
         editMenu.add(toggleLineCommentItem);
         editMenu.add(toggleBlockCommentItem);
+        editMenu.addSeparator();
         editMenu.add(emmetItem);
         //add to menubar
         menuBar.add(editMenu);
@@ -450,6 +454,7 @@ public class BsCode extends JFrame implements ActionListener{
         setVisible(true);
 
     }
+    @Override
     public void actionPerformed(ActionEvent e){
         JMenuItem source = (JMenuItem)e.getSource();
         if(source == newTextFile || source == newFile){
@@ -542,8 +547,6 @@ public class BsCode extends JFrame implements ActionListener{
             toggleBlockComment();
         } else if (source == emmetItem) {
             emmetExpandAbbreviation();
-        }else{
-            System.out.println("debugging purposes");
         }
         //for any subitem i will add in the future
 
@@ -554,6 +557,7 @@ public class BsCode extends JFrame implements ActionListener{
     }
     private void autoSave(){
         Timer timer = new Timer(5000, new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e){
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter("autosave.txt"))){
                     textArea.write(writer);
