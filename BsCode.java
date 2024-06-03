@@ -584,7 +584,7 @@ public class BsCode extends JFrame implements ActionListener{
         }
     }
     private void autoSave(){
-        Timer timer = new Timer(5000, new ActionListener() {
+        Timer timer = new Timer(2000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter("autosave.txt"))){
