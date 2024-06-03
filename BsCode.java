@@ -127,13 +127,27 @@ public class BsCode extends JFrame implements ActionListener{
         toggleLineComment = new JMenu("Toggle Line Comment");
         toggleBlockComment = new JMenu("Toggle Block Comment");
         emmet = new JMenu("Emmet:Expand Abbreviation");
-        JMenuItem[] editMenuItems = {
-            cutItem,copyItem,pasteItem,redoItem,undoItem,find,replace,findInFiles,replaceInFiles,toggleLineComment,toggleBlockComment,emmet
-    };
-        //add actionlisteners to fileMenu
-        for (JMenuItem item : editMenuItems) {
-            item.addActionListener(this);
-        }
+
+        cutItem.addActionListener(this);
+        copyItem.addActionListener(this);
+        pasteItem.addActionListener(this);
+        undoItem.addActionListener(this);
+        redoItem.addActionListener(this);
+        find.addActionListener(this);
+        replace.addActionListener(this);
+        findInFiles.addActionListener(this);
+        replaceInFiles.addActionListener(this);
+        toggleLineComment.addActionListener(this);
+        toggleBlockComment.addActionListener(this);
+        emmet.addActionListener(this);
+
+    //     JMenuItem[] editMenuItems = {
+    //         cutItem,copyItem,pasteItem,redoItem,undoItem,find,replace,findInFiles,replaceInFiles,toggleLineComment,toggleBlockComment,emmet
+    // };
+    //     //add actionlisteners to fileMenu
+    //     for (JMenuItem item : editMenuItems) {
+    //         item.addActionListener(this);
+    //     }
         //add to the menu
         editMenu.add(undoItem);
         editMenu.add(redoItem);
@@ -524,11 +538,12 @@ public class BsCode extends JFrame implements ActionListener{
         }else if(source == redoItem){
             if(undoManager.canRedo()){
                 undoManager.redo();
-            }
+            }//find,replace,findInFiles,replaceInFiles,toggleLineComment,toggleBlockComment,emmet
         } else if (source == find) {
             findText();
         } else if (source == replace) {
-            replaceText();
+            System.out.println("yikes");
+            // replaceText();
         } else if (source == findInFiles) {
             findInFiles();
         } else if (source == replaceInFiles) {
@@ -539,6 +554,8 @@ public class BsCode extends JFrame implements ActionListener{
             toggleBlockComment();
         } else if (source == emmet) {
             emmetExpandAbbreviation();
+        }else{
+            System.out.println("debugging purposes");
         }
         //for any subitem i will add in the future
 
@@ -590,6 +607,7 @@ public class BsCode extends JFrame implements ActionListener{
        }
     }
     private void replaceText(){
+        System.out.println("mistake");
         JPanel panel = new JPanel(new GridLayout(2,2));
         JTextField findField = new JTextField();
         JTextField replaceField = new JTextField();
