@@ -20,7 +20,8 @@ public class BsCode extends JFrame implements ActionListener{
     private JMenuItem newTextFile,newFile,newWindow,openFile,openFolder,openWorkspace,openRecent,addFolderToWorkSpace,saveWorkSpaceAs,
                      duplicateWorkSpace,saveItem,saveAs,saveAll,share,autoSave,preferences,revertFile,closeEditor,closeFolder,closeWindow,Exit;
     //items for edit menu
-    private JMenuItem cutItem,copyItem,pasteItem,redoItem,undoItem,find,replace,findInFiles,replaceInFiles,toggleLineComment,toggleBlockComment,emmet;
+    private JMenuItem cutItem,copyItem,pasteItem,redoItem,undoItem,findItem,replaceItem,findInFilesItem,replaceInFilesItem,toggleLineCommentItem,
+                      toggleBlockCommentItem,emmetItem;
     //items for selection menu
     private JMenuItem selectAll,expandSelection,shrinkSelection,copyLineUp,copyLineDown,moveLineUp,moveLineDown,duplicateSelection,addCursorAbove,
                        addCursorBelow,addCursorToLineEnd,addNextOccurence,addPreviousOccurence,selectAllOccurences,switchToCtrl,columnSelectionMode;
@@ -120,34 +121,22 @@ public class BsCode extends JFrame implements ActionListener{
         pasteItem = new JMenuItem("Paste");
         undoItem = new JMenuItem("Undo");
         redoItem = new JMenuItem("Redo");
-        find = new JMenu("Find");
-        replace = new JMenu("Replace");
-        findInFiles= new JMenu("Find In Files");
-        replaceInFiles = new JMenu("Replace In Files");
-        toggleLineComment = new JMenu("Toggle Line Comment");
-        toggleBlockComment = new JMenu("Toggle Block Comment");
-        emmet = new JMenu("Emmet:Expand Abbreviation");
+        findItem = new JMenu("Find");
+        replaceItem = new JMenu("Replace");
+        findInFilesItem= new JMenu("Find In Files");
+        replaceInFilesItem = new JMenu("Replace In Files");
+        toggleLineCommentItem = new JMenu("Toggle Line Comment");
+        toggleBlockCommentItem = new JMenu("Toggle Block Comment");
+        emmetItem = new JMenu("Emmet:Expand Abbreviation");
 
-        cutItem.addActionListener(this);
-        copyItem.addActionListener(this);
-        pasteItem.addActionListener(this);
-        undoItem.addActionListener(this);
-        redoItem.addActionListener(this);
-        find.addActionListener(this);
-        replace.addActionListener(this);
-        findInFiles.addActionListener(this);
-        replaceInFiles.addActionListener(this);
-        toggleLineComment.addActionListener(this);
-        toggleBlockComment.addActionListener(this);
-        emmet.addActionListener(this);
-
-    //     JMenuItem[] editMenuItems = {
-    //         cutItem,copyItem,pasteItem,redoItem,undoItem,find,replace,findInFiles,replaceInFiles,toggleLineComment,toggleBlockComment,emmet
-    // };
-    //     //add actionlisteners to fileMenu
-    //     for (JMenuItem item : editMenuItems) {
-    //         item.addActionListener(this);
-    //     }
+        JMenuItem[] editMenuItems = {
+            cutItem,copyItem,pasteItem,redoItem,undoItem,findItem,replaceItem,findInFilesItem,replaceInFilesItem,toggleLineCommentItem,
+            toggleBlockCommentItem,emmetItem
+    };
+        //add actionlisteners to fileMenu
+        for (JMenuItem item : editMenuItems) {
+            item.addActionListener(this);
+        }
         //add to the menu
         editMenu.add(undoItem);
         editMenu.add(redoItem);
@@ -156,15 +145,15 @@ public class BsCode extends JFrame implements ActionListener{
         editMenu.add(copyItem);
         editMenu.add(pasteItem);
         editMenu.addSeparator();
-        editMenu.add(find);
-        editMenu.add(replace);
+        editMenu.add(findItem);
+        editMenu.add(replaceItem);
         editMenu.addSeparator();
-        editMenu.add(findInFiles);
-        editMenu.add(replaceInFiles);
+        editMenu.add(findInFilesItem);
+        editMenu.add(replaceInFilesItem);
         editMenu.addSeparator();
-        editMenu.add(toggleLineComment);
-        editMenu.add(toggleBlockComment);
-        editMenu.add(emmet);
+        editMenu.add(toggleLineCommentItem);
+        editMenu.add(toggleBlockCommentItem);
+        editMenu.add(emmetItem);
         //add to menubar
         menuBar.add(editMenu);
         //initialize selection menu
@@ -538,21 +527,20 @@ public class BsCode extends JFrame implements ActionListener{
         }else if(source == redoItem){
             if(undoManager.canRedo()){
                 undoManager.redo();
-            }//find,replace,findInFiles,replaceInFiles,toggleLineComment,toggleBlockComment,emmet
-        } else if (source == find) {
+            }
+        } else if (source == findItem) {
             findText();
-        } else if (source == replace) {
-            System.out.println("yikes");
-            // replaceText();
-        } else if (source == findInFiles) {
+        } else if (source == replaceItem) {
+            replaceText();
+        } else if (source == findInFilesItem) {
             findInFiles();
-        } else if (source == replaceInFiles) {
+        } else if (source == replaceInFilesItem) {
             replaceInFiles();
-        } else if (source == toggleLineComment) {
+        } else if (source == toggleLineCommentItem) {
             toggleLineComment();
-        } else if (source == toggleBlockComment) {
+        } else if (source == toggleBlockCommentItem) {
             toggleBlockComment();
-        } else if (source == emmet) {
+        } else if (source == emmetItem) {
             emmetExpandAbbreviation();
         }else{
             System.out.println("debugging purposes");
