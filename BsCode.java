@@ -1,3 +1,6 @@
+// import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+// import org.fife.ui.rtextarea.RTextScrollPane;
+
 import javax.swing.*;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
@@ -10,6 +13,7 @@ import java.io.*;
 
 public class BsCode extends JFrame implements ActionListener{
     private JTextArea textArea;
+    // private RSyntaxTextArea textArea;
     private JMenuBar menuBar;
     private JMenu fileMenu,editMenu,selectionMenu,viewMenu,goMenu,runMenu,terminalMenu,helpMenu;
     //items for file menu
@@ -37,6 +41,7 @@ public class BsCode extends JFrame implements ActionListener{
 
     public BsCode(){
         setTitle("BS Code");
+        // textArea = new RSyntaxTextArea();
         //initialzing text area..
         textArea = new JTextArea();
         textArea.setLineWrap(true);
@@ -125,7 +130,7 @@ public class BsCode extends JFrame implements ActionListener{
         JMenuItem[] editMenuItems = {
             cutItem,copyItem,pasteItem,redoItem,undoItem,find,replace,findInFiles,replaceInFiles,toggleLineComment,toggleBlockComment,emmet
     };
-        //add items to fileMenu
+        //add actionlisteners to fileMenu
         for (JMenuItem item : editMenuItems) {
             item.addActionListener(this);
         }
@@ -385,7 +390,6 @@ public class BsCode extends JFrame implements ActionListener{
         //add to menubar
         menuBar.add(terminalMenu);
         //initialize help menu
-        //welcome,showAllCommands,documentation,editorPlayGround,showReleaseDates,keyboardShortcuts,videoTutorials,tipsTricks,reportIssue,devTools,updates,about
         helpMenu = new JMenu("Help");
         welcome = new JMenuItem("Welcome");
         showAllCommands = new JMenuItem("Show All Commands");
@@ -486,11 +490,11 @@ public class BsCode extends JFrame implements ActionListener{
             clipboard.setContents(stringSelection, null);
             //events for listed items
         }else if(source == autoSave){
-            //to be added soon..
+            autoSave();
         }
         //events for listed items
         else if(source == revertFile){
-            //to be added..
+            revertFile();
         }
         //events for listed items
         else if(source == closeEditor){
@@ -498,7 +502,7 @@ public class BsCode extends JFrame implements ActionListener{
         }
         //events for listed items
         else if(source == closeFolder){
-        //to be added..
+        closeFolder();
        }
        //events for listed items
        else if(source == closeWindow){
@@ -521,10 +525,135 @@ public class BsCode extends JFrame implements ActionListener{
             if(undoManager.canRedo()){
                 undoManager.redo();
             }
+        } else if (source == find) {
+            findText();
+        } else if (source == replace) {
+            replaceText();
+        } else if (source == findInFiles) {
+            findInFiles();
+        } else if (source == replaceInFiles) {
+            replaceInFiles();
+        } else if (source == toggleLineComment) {
+            toggleLineComment();
+        } else if (source == toggleBlockComment) {
+            toggleBlockComment();
+        } else if (source == emmet) {
+            emmetExpandAbbreviation();
+        }
+        //for any subitem i will add in the future
+
+        // } else if (source.getText().equals("Sub Item")) {
+        //     // Handle example nested item action
+        //     JOptionPane.showMessageDialog(this, "Sub Item Clicked!");
+        // }
+    }
+    private void autoSave(){
+        Timer timer = new Timer(5000, new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("autosave.txt"))){
+                    textArea.write(writer);
+                } catch (IOException ioException) {
+                    JOptionPane.showMessageDialog(null, "Auto-save failed!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        timer.start();
+    }
+    private void revertFile(){
+        JFileChooser fileChooser = new JFileChooser();
+        int option = fileChooser.showOpenDialog(this);
+        if (option == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))){
+                textArea.read(reader, null);
+            } catch (IOException ioException) {
+                JOptionPane.showMessageDialog(null, "!!oops..could not open file!", "Error", JOptionPane.ERROR_MESSAGE);
+            }     
         }
     }
+    private void closeFolder() {
+      //i will add this later,be patient..
+        JOptionPane.showMessageDialog(this, "Close Folder functionality to be implemented.", "Information", JOptionPane.INFORMATION_MESSAGE);
+    }
+    private void findText(){
+        String searchText = JOptionPane.showInputDialog("Enter text to find");
+        if(searchText != null){
+            String text = textArea.getText();
+            int index = text.indexOf(searchText);
+            if(index >= 0){
+                textArea.setCaretPosition(index);
+                textArea.select(index, index + searchText.length());
+                textArea.grabFocus();
+            }else{
+                 JOptionPane.showMessageDialog(this, "Text not found", "Find", JOptionPane.INFORMATION_MESSAGE); 
+            }
+       }
+    }
+    private void replaceText(){
+        JPanel panel = new JPanel(new GridLayout(2,2));
+        JTextField findField = new JTextField();
+        JTextField replaceField = new JTextField();
+        panel.add(new JLabel("Find"));
+        panel.add(findField);
+        panel.add(new JLabel("Replace:"));
+        panel.add(replaceField);
+
+        int result = JOptionPane.showConfirmDialog(this, panel, "Replace Text", JOptionPane.OK_CANCEL_OPTION);
+        if(result == JOptionPane.OK_OPTION){
+            String findText = findField.getText();
+            String replaceText = replaceField.getText();
+            textArea.setText(textArea.getText().replace(findText,replaceText));
+        }
+    }
+    private void findInFiles() {
+        // I know i have said this alot but...i will do this later too:)
+        JOptionPane.showMessageDialog(this, "Find in Files functionality coming soon...", "Information", JOptionPane.INFORMATION_MESSAGE);
+    }
+    private void replaceInFiles() {
+        //yikes i bet you won't use this feature today..i have never used such a feature too..be patient
+        JOptionPane.showMessageDialog(this, "Replace in Files functionality coming sooner...", "Information", JOptionPane.INFORMATION_MESSAGE);
+    }
+    private void toggleLineComment(){
+        int start = textArea.getSelectionStart();
+        int end = textArea.getSelectionEnd();
+        try {
+            int lineStart = textArea.getLineOfOffset(start);
+            int lineEnd = textArea.getLineOfOffset(end);
+            for(int i = lineStart; i <= lineEnd;i++){
+                int startOffset = textArea.getLineOfOffset(i);
+                int endOffset = textArea.getLineOfOffset(i);
+                String lineText = textArea.getText(startOffset,endOffset - startOffset).trim();
+                if (lineText.startsWith("//")) {
+                    textArea.replaceRange(lineText.substring(2), startOffset, endOffset);     
+                }else{
+                    textArea.insert("//",startOffset);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error toggling line comment!!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private void toggleBlockComment(){
+        int start = textArea.getSelectionStart();
+        int end = textArea.getSelectionEnd();
+        try {
+            String selectedText = textArea.getText(start, end - start);
+            if (selectedText.startsWith("/*") && selectedText.endsWith("*/")) {
+                textArea.replaceRange(selectedText.substring(2, selectedText.length() - 2), start, end);
+            } else {
+                textArea.insert("/*", start);
+                textArea.insert("*/", end + 2);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error toggling block comment!!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private void emmetExpandAbbreviation() {
+        // soooon..
+        JOptionPane.showMessageDialog(this, "Emmet Expand Abbreviation functionality to be implemented..", "Information", JOptionPane.INFORMATION_MESSAGE);
+    }
     public static void main(String[]args){
-        new BsCode();
+        SwingUtilities.invokeLater(() -> new BsCode());
     }
 
 }
