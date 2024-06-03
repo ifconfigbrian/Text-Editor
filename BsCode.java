@@ -15,7 +15,7 @@ public class BsCode extends JFrame implements ActionListener{
     private JTextArea textArea;
     // private RSyntaxTextArea textArea;
     private JMenuBar menuBar;
-    private JMenu fileMenu,editMenu,selectionMenu,viewMenu,goMenu,runMenu,terminalMenu,helpMenu;
+    private JMenu fileMenu,editMenu,selectionMenu,viewMenu,goMenu,runMenu,terminalMenu,helpMenu,formatMenu;
     //items for file menu
     private JMenuItem newTextFile,newFile,newWindow,openFile,openFolder,openWorkspace,openRecent,addFolderToWorkSpace,saveWorkSpaceAs,
                      duplicateWorkSpace,saveItem,saveAs,saveAll,share,autoSave,preferences,revertFile,closeEditor,closeFolder,closeWindow,Exit;
@@ -37,7 +37,9 @@ public class BsCode extends JFrame implements ActionListener{
     //items for terminal
     private JMenuItem newTerminal,splitTerminal,runTask,runBuildTask,runActive,runSelected,showRunning,restartRunning,terminateTask,configureTasks,configureDefault;
     //items for help
-    private JMenuItem welcome,showAllCommands,documentation,editorPlayGround,showReleaseNotes,keyboardShortcuts,videoTutorials,tipsTricks,reportIssue,devTools,updates,about;                                   
+    private JMenuItem welcome,showAllCommands,documentation,editorPlayGround,showReleaseNotes,keyboardShortcuts,videoTutorials,tipsTricks,reportIssue,devTools,updates,about;
+    //items for format menu
+    private JMenuItem fontItem,fontSizeItem;                                   
     private UndoManager undoManager;
 
     public BsCode(){
@@ -115,6 +117,7 @@ public class BsCode extends JFrame implements ActionListener{
         //add fileMenu to menuBar
         menuBar.add(fileMenu);
         //initialize edit menu
+        //don't touch or change anything..please this section is cursed..
         editMenu = new JMenu("Edit");
         cutItem = new JMenuItem("Cut");
         copyItem = new JMenuItem("Copy");
@@ -439,6 +442,15 @@ public class BsCode extends JFrame implements ActionListener{
         helpMenu.add(about);
         //add to menu bar
         menuBar.add(helpMenu);
+        // Initialize format menu
+        formatMenu = new JMenu("Format");
+        fontItem = new JMenuItem("Font");
+        fontSizeItem = new JMenuItem("Font Size");
+        fontItem.addActionListener(this);
+        fontSizeItem.addActionListener(this);
+        formatMenu.add(fontItem);
+        formatMenu.add(fontSizeItem);
+        menuBar.add(formatMenu);
         //set menubar
         setJMenuBar(menuBar);
         //initialize undo manager..
@@ -547,13 +559,29 @@ public class BsCode extends JFrame implements ActionListener{
             toggleBlockComment();
         } else if (source == emmetItem) {
             emmetExpandAbbreviation();
+        }else if (source == fontItem) {
+            showFontDialog();
+        } else if (source == fontSizeItem) {
+            String size = JOptionPane.showInputDialog(this, "Enter Font Size:", "Font Size", JOptionPane.PLAIN_MESSAGE);
+            if (size != null) {
+                try {
+                    int fontSize = Integer.parseInt(size);
+                    Font currentFont = textArea.getFont();
+                    textArea.setFont(new Font(currentFont.getName(), currentFont.getStyle(), fontSize));
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(this, "Invalid font size!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
         }
-        //for any subitem i will add in the future
-
-        // } else if (source.getText().equals("Sub Item")) {
-        //     // Handle example nested item action
-        //     JOptionPane.showMessageDialog(this, "Sub Item Clicked!");
-        // }
+    }
+    
+    private void showFontDialog() {
+        String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+        String font = (String) JOptionPane.showInputDialog(this, "Choose Font:", "Font", JOptionPane.PLAIN_MESSAGE, null, fonts, textArea.getFont().getFamily());
+        if (font != null) {
+            Font currentFont = textArea.getFont();
+            textArea.setFont(new Font(font, currentFont.getStyle(), currentFont.getSize()));
+        }
     }
     private void autoSave(){
         Timer timer = new Timer(5000, new ActionListener() {
