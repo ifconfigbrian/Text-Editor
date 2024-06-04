@@ -170,7 +170,7 @@ public class BsCode extends JFrame implements ActionListener{
         shrinkSelection = new JMenuItem("Shrink Selection");
         copyLineUp = new JMenuItem("Copy Line Up");
         copyLineDown = new JMenuItem("Copy Line Down");
-        moveLineUp = new JMenuItem("Select All");
+        moveLineUp = new JMenuItem("Move Line Up");
         moveLineDown = new JMenuItem("Move Line Down");
         duplicateSelection = new JMenuItem("Duplicate Selection");
         addCursorAbove = new JMenuItem("Add Cursor Above");
@@ -572,9 +572,147 @@ public class BsCode extends JFrame implements ActionListener{
                     JOptionPane.showMessageDialog(this, "Invalid font size!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
+        }else if(source == selectAll){
+            textArea.selectAll();
+        }else if(source ==expandSelection ){
+            int start = textArea.getSelectionStart();
+            int end = textArea.getSelectionEnd();
+            if (start > 0)start--; 
+                if(end < textArea.getText().length())end++;
+                textArea.select(start,end);      
+        }else if(source == shrinkSelection){
+            int start = textArea.getSelectionStart();
+            int end = textArea.getSelectionEnd();
+            if(start < end){
+                start++;
+                end--;
+            }
+            textArea.select(start,end);
+        }else if(source == copyLineUp){
+            copyLineUp();
+        }else if(source == copyLineDown){
+            copyLineDown();
+        }else if(source == moveLineUp){
+            moveLineUp();
+        }else if(source == moveLineDown){
+            moveLineDown();
+        }else if(source == duplicateSelection){
+            duplicateSelection();
+        }else if(source == addCursorAbove){
+            JOptionPane.showMessageDialog(this, "subscribe to premium for cool features..");
+        }else if(source == addCursorBelow){
+            JOptionPane.showMessageDialog(this, "subscribe to premium for cool features..");
+        }else if(source == addCursorToLineEnd){
+            int endOfLine = textArea.getCaretPosition();
+            while (endOfLine < textArea.getText().length() && textArea.getText().charAt(endOfLine)!= '\n') {
+                endOfLine++;  
+            }
+            textArea.setCaretPosition(endOfLine);
+        }else if(source == addNextOccurence){
+            addNextOccurence();
+        }else if(source == addPreviousOccurence){
+            addPreviousOccurence();
+        }else if(source == selectAllOccurences){
+            selectAllOccurences();
+        }else if(source == switchToCtrl){
+            JOptionPane.showMessageDialog(this, "subscribe to premium for cool features..");
+        }else if(source == columnSelectionMode){
+            JOptionPane.showMessageDialog(this, "subscribe to premium for cool features..");
         }
     }
-    
+    private void copyLineUp(){
+    //     try {
+    //         // int start = textArea.getLineStartOffset(textArea.getCaretLineNumber());this will be added using the github library
+    //         // int end = textArea.getLineEndOffset(textArea.getCaretLineNumber());
+    //         String line = textArea.getText(start,end - start);
+    //         textArea.insert(line, start);
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
+    }
+    private void copyLineDown(){
+        //     try {
+        //         // int start = textArea.getLineStartOffset(textArea.getCaretLineNumber());this will be added using the github library
+        //         // int end = textArea.getLineEndOffset(textArea.getCaretLineNumber());
+        //         String line = textArea.getText(start,end - start);
+        //         textArea.insert(line, end);
+        //     } catch (Exception e) {
+        //         e.printStackTrace();
+        //     }
+        }
+    private void moveLineUp(){
+        // try {
+        //     int currentLine = textArea.getCaretLineNumber();
+        //     if (currentLine == 0)return;
+        //     int startCurrent = textArea.getLineStartOffset(currentLine);
+        //     int endCurrent = textArea.getLineEndOffset(currentLine);
+        //     String lineCurrent = textArea.getText(startCurrent,endCurrent - startCurrent);
+
+        //     int startPrev = textArea.getLineStartOffset(currentLine-1);
+        //     int endPrev = textArea.getLineEndOffset(currentLine-1);
+        //     String linePrev = textArea.getText(startPrev,endPrev - startPrev);
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
+    }
+    private void moveLineDown(){
+        // try {
+        //     int currentLine = textArea.getCaretLineNumber();
+        //     int totalLines = textArea.getLineCount();
+        //     if (currentLine == totalLines -1)return;
+        //     int startCurrent = textArea.getLineStartOffset(currentLine);
+        //     int endCurrent = textArea.getLineEndOffset(currentLine);
+        //     String lineCurrent = textArea.getText(startCurrent,endCurrent - startCurrent);
+
+        //     int startNext = textArea.getLineStartOffset(currentLine +1);
+        //     int endNext = textArea.getLineEndOffset(currentLine +1);
+        //     String lineNext = textArea.getText(startNext,endNext - startNext);
+
+        //     textArea.replaceRange(lineCurrent, startNext, endNext);
+        //     textArea.replaceRange(lineNext, startCurrent, endCurrent);
+        //     textArea.setCaretPosition(startNext);
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
+    }
+    private void duplicateSelection(){
+        String selectedText = textArea.getSelectedText();
+        if (selectedText != null) {
+            textArea.insert(selectedText, textArea.getSelectionEnd());    
+        }
+    }
+    private void addNextOccurence(){
+        String selectedText = textArea.getSelectedText();
+        if (selectedText !=null) {
+            String content = textArea.getText();
+            int nextOccurence = content.indexOf(selectedText,textArea.getSelectionEnd());
+            if (nextOccurence != -1) {
+                textArea.select(nextOccurence, nextOccurence + selectedText.length());
+            }  
+        }
+    }
+    private void addPreviousOccurence(){
+        String selectedText = textArea.getSelectedText();
+        if (selectedText != null) {
+            String content = textArea.getText();
+            int previousOccurence = content.lastIndexOf(selectedText,textArea.getSelectionStart() -1);
+            if (previousOccurence != -1) {
+                textArea.select(previousOccurence, previousOccurence + selectedText.length());       
+            }  
+        }
+    }
+    private void selectAllOccurences(){
+        String selectedText = textArea.getSelectedText();
+        if (selectedText != null) {
+            String content = textArea.getText();
+            textArea.select(0,0);//this resets selection
+            int occurence = content.indexOf(selectedText);
+            while (occurence != -1) {
+                textArea.select(textArea.getSelectionStart(), occurence + selectedText.length());
+                occurence = content.indexOf(selectedText,occurence ++);     
+            }  
+        }
+    }  
     private void showFontDialog() {
         String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
         String font = (String) JOptionPane.showInputDialog(this, "Choose Font:", "Font", JOptionPane.PLAIN_MESSAGE, null, fonts, textArea.getFont().getFamily());
