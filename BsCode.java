@@ -689,7 +689,70 @@ public class BsCode extends JFrame implements ActionListener{
                 goToNextChange();
         } else if (source == previousChange) {
                 goToPreviousChange();
+
+        }else if(source == newTerminal){
+            openTerminal();
+        }else if(source == splitTerminal){
+            splitTerminal();
+        }else if(source == runTask){
+            runTask();
+        }else if(source == runBuildTask){
+            runBuildTask();
+        }else if(source == runActive){
+            runActive();
+        }else if(source == runSelected){
+            runSelected();
+        }else if(source == showRunning){
+            showRunning();
+        }else if(source == restartRunning){
+            restartRunning();
+        }else if(source == terminateTask){
+            terminateTask();
+        }else if(source == configureTasks){
+            configureTasks();
+        }else if(source == configureDefault){
+            configureDefault();
         }
+    }
+    private void splitTerminal(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+    
+    }
+    private void runTask(){
+       JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+
+    }
+    private void runBuildTask(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+
+    }
+    private void runActive(){
+       JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+
+    }
+    private void runSelected(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+
+    }
+    private void showRunning(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+
+    }
+    private void restartRunning(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+
+    }
+    private void terminateTask(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+
+    }
+    private void configureDefault(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+
+    }
+    private void configureTasks(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+        
     }
     private void goBack() {
         JOptionPane.showMessageDialog(this, "subscribe to premium!");
@@ -712,10 +775,16 @@ public class BsCode extends JFrame implements ActionListener{
     }
 
     private void goToFile() {
-        String fileName = JOptionPane.showInputDialog(this, "Enter file name:");
-        if (fileName != null) {
-            JOptionPane.showMessageDialog(this, "Go to File: " + "" + fileName);
-        }
+        JFileChooser fileChooser = new JFileChooser();
+            int option = fileChooser.showOpenDialog(this);
+            if(option == JFileChooser.APPROVE_OPTION){
+                File file = fileChooser.getSelectedFile();
+                try(BufferedReader reader = new BufferedReader(new FileReader(file))){
+                    textArea.read(reader,null);
+                }catch(IOException ioException){
+                    JOptionPane.showMessageDialog(this,"Oops! Could not open file!!","Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }
     }
 
     private void goToSymbolInWorkspace() {
