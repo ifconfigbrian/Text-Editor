@@ -255,7 +255,6 @@ public class BsCode extends JFrame implements ActionListener{
         viewMenu.add(terminal);
         viewMenu.addSeparator();
         viewMenu.add(wordWrap);
-        
         menuBar.add(viewMenu);
         //initialize go menu
         goMenu = new JMenu("Go");
@@ -618,7 +617,98 @@ public class BsCode extends JFrame implements ActionListener{
             JOptionPane.showMessageDialog(this, "subscribe to premium for cool features..");
         }else if(source == columnSelectionMode){
             JOptionPane.showMessageDialog(this, "subscribe to premium for cool features..");
+        }else if (source == commandPall) {
+            showCommandPalette();
+        } else if (source == openView) {
+            openView();
+        } else if (source == appearance) {
+            setAppearance();
+        } else if (source == editLayout) {
+            editLayout();
+        } else if (source == explorer) {
+            openExplorer();
+        } else if (source == search) {
+            openSearch();
+        } else if (source == sourceControl) {
+            openSourceControl();
+        } else if (source == run) {
+            runCode();
+        } else if (source == extensions) {
+            openExtensions();
+        } else if (source == testing) {
+            openTesting();
+        } else if (source == problems) {
+            openProblems();
+        } else if (source == output) {
+            openOutput();
+        } else if (source == debugConsole) {
+            openDebugConsole();
+        } else if (source == terminal) {
+            openTerminal();
+        } else if (source == wordWrap) {
+            textArea.setLineWrap(!textArea.getLineWrap());
         }
+    }
+    private void showCommandPalette(){
+        String command = JOptionPane.showInputDialog(this,"Enter Command");
+        if(command != null){
+            JOptionPane.showMessageDialog(this,"Executing command" + command);
+        }
+    }
+    private void openView(){
+        JDialog viewDialog = new JDialog(this,"Open view",true);
+        viewDialog.setSize(400,300);
+        viewDialog.setLocationRelativeTo(this);
+        viewDialog.setVisible(true);
+    }
+    private void setAppearance(){
+        JColorChooser colorChooser = new JColorChooser();
+        Color newColor = JColorChooser.showDialog(this,"Choose Background Color..",textArea.getBackground());
+        if(newColor != null){
+            textArea.setBackground(newColor);
+        }
+    }
+    private void editLayout(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!");
+    }
+    private void openExplorer(){
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int option = fileChooser.showOpenDialog(this);
+        if(option == JFileChooser.APPROVE_OPTION){
+            File selectedDirectory = fileChooser.getSelectedFile();
+            JOptionPane.showMessageDialog(this, "Explorer opend for: " + selectedDirectory.getAbsolutePath());
+        }
+    }
+    private void openSearch(){
+        String searchTerm = JOptionPane.showInputDialog(this,"Enter term:");
+        if (search != null) {
+            JOptionPane.showMessageDialog(this, "Searching for: " + searchTerm);   
+        }
+    }
+    private void openSourceControl(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!");
+    }
+    private void runCode(){
+        JOptionPane.showMessageDialog(this, "running code...");
+    }
+    private void openExtensions(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!");
+    }
+    private void openTesting(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!");
+    }
+    private void openProblems(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!");
+    }
+    private void openOutput(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!");
+    }
+    private void openDebugConsole(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!");
+    }
+    private void openTerminal(){
+
     }
     private void copyLineUp(){
     //     try {
