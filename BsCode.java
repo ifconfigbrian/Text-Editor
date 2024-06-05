@@ -1,5 +1,9 @@
 // import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 // import org.fife.ui.rtextarea.RTextScrollPane;
+// import com.jediterm.terminal.ui.JediTermWidget;
+// import com.jediterm.terminal.ui.settings.DefaultSettingsProvider;
+//download JTermial jar..and jediterm
+
 
 import javax.swing.*;
 import javax.swing.event.UndoableEditEvent;
@@ -29,7 +33,7 @@ public class BsCode extends JFrame implements ActionListener{
     private JMenuItem commandPall,openView,appearance,editLayout,explorer,search,sourceControl,run,extensions,testing,problems,output,debugConsole,
                       terminal,wordWrap;
     //items for go menu
-    private JMenuItem back,forwad,lastEditLocation,switchEditor,switchGroup,goToFile,goToSymbolInWorkspace,goToSymbolInEditor,defination,declaration,
+    private JMenuItem   back,forwad,lastEditLocation,switchEditor,switchGroup,goToFile,goToSymbolInWorkspace,goToSymbolInEditor,defination,declaration,
                       typeDefination,implementations,references,goToLineColumn,bracket,nextProblem,previousProblem,nextChange,previousChange; 
     //items for run menu
     private JMenuItem startDebugging,runWithout,stopDebugging,restartDebugging,openConfigurations,addConfiguration,stepOver,stepInto,stepOut,continuee,
@@ -255,7 +259,6 @@ public class BsCode extends JFrame implements ActionListener{
         viewMenu.add(terminal);
         viewMenu.addSeparator();
         viewMenu.add(wordWrap);
-        
         menuBar.add(viewMenu);
         //initialize go menu
         goMenu = new JMenu("Go");
@@ -618,7 +621,306 @@ public class BsCode extends JFrame implements ActionListener{
             JOptionPane.showMessageDialog(this, "subscribe to premium for cool features..");
         }else if(source == columnSelectionMode){
             JOptionPane.showMessageDialog(this, "subscribe to premium for cool features..");
+        }else if (source == commandPall) {
+            showCommandPalette();
+        } else if (source == openView) {
+            openView();
+        } else if (source == appearance) {
+            setAppearance();
+        } else if (source == editLayout) {
+            editLayout();
+        } else if (source == explorer) {
+            openExplorer();
+        } else if (source == search) {
+            openSearch();
+        } else if (source == sourceControl) {
+            openSourceControl();
+        } else if (source == run) {
+            runCode();
+        } else if (source == extensions) {
+            openExtensions();
+        } else if (source == testing) {
+            openTesting();
+        } else if (source == problems) {
+            openProblems();
+        } else if (source == output) {
+            openOutput();
+        } else if (source == debugConsole) {
+            openDebugConsole();
+        } else if (source == terminal) {
+            openTerminal();
+        } else if (source == wordWrap) {
+            textArea.setLineWrap(!textArea.getLineWrap());
+        }else if (source == back) {
+                goBack();
+        } else if (source == forwad) {
+                goForward();
+        } else if (source == lastEditLocation) {
+                goToLastEditLocation();
+        } else if (source == switchEditor) {
+                switchEditor();
+        } else if (source == switchGroup) {
+                switchGroup();
+        } else if (source == goToFile) {
+                goToFile();
+        } else if (source == goToSymbolInWorkspace) {
+                goToSymbolInWorkspace();
+        } else if (source == goToSymbolInEditor) {
+                goToSymbolInEditor();
+        } else if (source == defination) {
+                goToDefinition();
+        } else if (source == declaration) {
+                goToDeclaration();
+        } else if (source == typeDefination) {
+                goToTypeDefinition();
+        } else if (source == implementations) {
+                goToImplementations();
+        } else if (source == references) {
+                goToReferences();
+        } else if (source == goToLineColumn) {
+                goToLineColumn();
+        } else if (source == bracket) {
+                goToBracket();
+        } else if (source == nextProblem) {
+                goToNextProblem();
+        } else if (source == previousProblem) {
+                goToPreviousProblem();
+        } else if (source == nextChange) {
+                goToNextChange();
+        } else if (source == previousChange) {
+                goToPreviousChange();
+
+        }else if(source == newTerminal){
+            openTerminal();
+        }else if(source == splitTerminal){
+            splitTerminal();
+        }else if(source == runTask){
+            runTask();
+        }else if(source == runBuildTask){
+            runBuildTask();
+        }else if(source == runActive){
+            runActive();
+        }else if(source == runSelected){
+            runSelected();
+        }else if(source == showRunning){
+            showRunning();
+        }else if(source == restartRunning){
+            restartRunning();
+        }else if(source == terminateTask){
+            terminateTask();
+        }else if(source == configureTasks){
+            configureTasks();
+        }else if(source == configureDefault){
+            configureDefault();
         }
+    }
+    private void splitTerminal(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+    
+    }
+    private void runTask(){
+       JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+
+    }
+    private void runBuildTask(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+
+    }
+    private void runActive(){
+       JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+
+    }
+    private void runSelected(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+
+    }
+    private void showRunning(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+
+    }
+    private void restartRunning(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+
+    }
+    private void terminateTask(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+
+    }
+    private void configureDefault(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+
+    }
+    private void configureTasks(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!!");
+        
+    }
+    private void goBack() {
+        JOptionPane.showMessageDialog(this, "subscribe to premium!");
+    }
+
+    private void goForward() {
+        JOptionPane.showMessageDialog(this, "subscribe to premium!");
+    }
+
+    private void goToLastEditLocation() {
+        JOptionPane.showMessageDialog(this, "subscribe to premium!");
+    }
+
+    private void switchEditor() {
+        JOptionPane.showMessageDialog(this, "subscribe to premium!");
+    }
+
+    private void switchGroup() {
+        JOptionPane.showMessageDialog(this, "subscribe to premium!");
+    }
+
+    private void goToFile() {
+        JFileChooser fileChooser = new JFileChooser();
+            int option = fileChooser.showOpenDialog(this);
+            if(option == JFileChooser.APPROVE_OPTION){
+                File file = fileChooser.getSelectedFile();
+                try(BufferedReader reader = new BufferedReader(new FileReader(file))){
+                    textArea.read(reader,null);
+                }catch(IOException ioException){
+                    JOptionPane.showMessageDialog(this,"Oops! Could not open file!!","Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+    }
+
+    private void goToSymbolInWorkspace() {
+        String symbol = JOptionPane.showInputDialog(this, "Enter symbol:");
+        if (symbol != null) {
+            JOptionPane.showMessageDialog(this, "Go to Symbol in Workspace: " + symbol);
+        }
+    }
+
+    private void goToSymbolInEditor() {
+        String symbol = JOptionPane.showInputDialog(this, "Enter symbol:");
+        if (symbol != null) {
+            JOptionPane.showMessageDialog(this, "Go to Symbol in Editor: " + symbol);
+        }
+    }
+
+    private void goToDefinition() {
+        JOptionPane.showMessageDialog(this, "subscribe to premium!");
+    }
+
+    private void goToDeclaration() {
+        JOptionPane.showMessageDialog(this, "subscribe to premium!");
+    }
+
+    private void goToTypeDefinition() {
+        JOptionPane.showMessageDialog(this, "subscribe to premium!");
+    }
+
+    private void goToImplementations() {
+        JOptionPane.showMessageDialog(this, "subscribe to premium!");
+    }
+
+    private void goToReferences() {
+        JOptionPane.showMessageDialog(this, "subscribe to premium!");
+    }
+
+    private void goToLineColumn() {
+        String lineColumn = JOptionPane.showInputDialog(this, "Enter line:column:");
+        if (lineColumn != null) {
+            JOptionPane.showMessageDialog(this, "Go to Line/Column: " + lineColumn);
+        }
+    }
+
+    private void goToBracket() {
+        JOptionPane.showMessageDialog(this, "subscribe to premium!");
+    }
+
+    private void goToNextProblem() {
+        JOptionPane.showMessageDialog(this, "subscribe to premium!");
+    }
+
+    private void goToPreviousProblem() {
+        JOptionPane.showMessageDialog(this, "subscribe to premium!");
+    }
+
+    private void goToNextChange() {
+        JOptionPane.showMessageDialog(this, "subscribe to premium!");
+    }
+
+    private void goToPreviousChange() {
+        JOptionPane.showMessageDialog(this, "subscribe to premium!");
+    }
+    private void showCommandPalette(){
+        String command = JOptionPane.showInputDialog(this,"Enter Command");
+        if(command != null){
+            JOptionPane.showMessageDialog(this,"Executing command" + "" + command);
+        }
+    }
+    private void openView(){
+        JDialog viewDialog = new JDialog(this,"Open view",true);
+        viewDialog.setSize(400,300);
+        viewDialog.setLocationRelativeTo(this);
+        viewDialog.setVisible(true);
+    }
+    private void setAppearance(){
+        JColorChooser colorChooser = new JColorChooser();
+        Color newColor = JColorChooser.showDialog(this,"Choose Background Color..",textArea.getBackground());
+        if(newColor != null){
+            textArea.setBackground(newColor);
+        }
+    }
+    private void editLayout(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!");
+    }
+    private void openExplorer(){
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int option = fileChooser.showOpenDialog(this);
+        if(option == JFileChooser.APPROVE_OPTION){
+            File selectedDirectory = fileChooser.getSelectedFile();
+            JOptionPane.showMessageDialog(this, "Explorer opend for: " + selectedDirectory.getAbsolutePath());
+        }
+    }
+    private void openSearch(){
+        String searchTerm = JOptionPane.showInputDialog(this,"Enter term:");
+        if (search != null) {
+            JOptionPane.showMessageDialog(this, "Searching for: " + searchTerm);   
+        }
+    }
+    private void openSourceControl(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!");
+    }
+    private void runCode(){
+        JOptionPane.showMessageDialog(this, "running code...");
+    }
+    private void openExtensions(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!");
+    }
+    private void openTesting(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!");
+    }
+    private void openProblems(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!");
+    }
+    private void openOutput(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!");
+    }
+    private void openDebugConsole(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!");
+    }
+    private void openTerminal(){
+        JOptionPane.showMessageDialog(this, "Subscribe to premium for cool features!");
+        // JFrame terminalFrame = new JFrame("Terminal");
+        // terminalFrame.setSize(800, 600);
+        // terminalFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // // Create JediTermWidget
+        // JediTermWidget terminal = new JediTermWidget(new DefaultSettingsProvider());
+        // terminalFrame.add(terminal, BorderLayout.CENTER);
+
+        // // Show the terminal frame
+        // terminalFrame.setVisible(true);
+
+        // // You can run a shell command or start a process in the terminal
+        // terminal.getTtyConnector().write("echo 'Welcome to the terminal!'\n");
+
     }
     private void copyLineUp(){
     //     try {
