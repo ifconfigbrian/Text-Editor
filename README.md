@@ -1,0 +1,3 @@
+#JAVA GUI#TEXT-EDITOR#...
+This is a text-editor courtesy of Java..
+..I was just testing my knowledge on java GUI so don't expect too much..
