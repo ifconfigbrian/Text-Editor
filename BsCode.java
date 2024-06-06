@@ -5,6 +5,7 @@
 //download JTermial jar..and jediterm
 
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
@@ -13,6 +14,7 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 
 public class BsCode extends JFrame implements ActionListener{
@@ -48,6 +50,18 @@ public class BsCode extends JFrame implements ActionListener{
 
     public BsCode(){
         setTitle("BS Code");
+        //set icon
+        BufferedImage iconImage = null;
+        try {
+            iconImage = ImageIO.read(getClass().getResource("216158_code_icon.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //resize the image
+        if (iconImage != null) {
+            BufferedImage coloredIconImage = changeImageColor(iconImage, Color.BLUE);
+            setIconImage(coloredIconImage); 
+        }
         // textArea = new RSyntaxTextArea();
         //initialzing text area..
         textArea = new JTextArea();
@@ -1129,6 +1143,25 @@ public class BsCode extends JFrame implements ActionListener{
     private void emmetExpandAbbreviation() {
         // soooon..
         JOptionPane.showMessageDialog(this, "Emmet Expand Abbreviation functionality to be implemented..", "Information", JOptionPane.INFORMATION_MESSAGE);
+    }
+    private BufferedImage changeImageColor(BufferedImage originalImage,Color color){
+        BufferedImage coloredImage = new BufferedImage(originalImage.getWidth(),originalImage.getHeight(),BufferedImage.TYPE_INT_ARGB);
+        for(int x = 0;x < originalImage.getWidth(); x++){
+            for(int y = 0;y < originalImage.getHeight(); y++){
+            int pixel = originalImage.getRGB(x, y);
+
+            if ((pixel & 0xFF000000) != 0x00000000) {//check if the pixel is not transparent
+             // Change the color of the pixel to the specified color while preserving the alpha channel
+            int alpha = (pixel >> 24) & 0xFF;
+            int newPixel = (alpha << 24) | (color.getRGB() & 0x00FFFFFF);
+            coloredImage.setRGB(x, y, newPixel);
+            }else{
+                coloredImage.setRGB(x, y, pixel);//preserve original pixel
+            }
+        }
+        }
+        return coloredImage;
+
     }
     public static void main(String[]args){
         SwingUtilities.invokeLater(() -> new BsCode());
